@@ -45,7 +45,7 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: ++this.nextCode, title: 'Новая запись', selectionsCount: 0 }],
+      list: [...this.state.list, { code: ++this.nextCode, title: 'Новая запись' }],
     });
   }
 
@@ -64,14 +64,19 @@ class Store {
    * Выделение записи по коду
    * @param code
    */
-  selectItem(code) {
+  selectItem(event, code) {
+    if (event.target.id === 'delete-button') {
+      event.stopPropagation();
+      return;
+    }
+
     this.setState({
       ...this.state,
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
-          if(item.selected) {
-            item.selectionsCount++;
+          if (item.selected) {
+            item.selectionsCount ? item.selectionsCount++ : (item.selectionsCount = 1);
           }
         } else {
           item.selected = false;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { createElement } from './utils.js';
 import './styles.css';
+import { getDeclination } from './utils.js';
 
 /**
  * Приложение
@@ -24,16 +24,19 @@ function App({ store }) {
             <div key={item.code} className="List-item">
               <div
                 className={'Item' + (item.selected ? ' Item_selected' : '')}
-                onClick={() => store.selectItem(item.code)}
+                onClick={e => store.selectItem(e, item.code)}
               >
                 <div className="Item-code">{item.code}</div>
-                <div className="Item-title">{item.title}
+                <div className="Item-title">
+                  {item.title}
                   {item.selectionsCount > 0 && (
-                    <div className="Item-counts">{` | Выделяли ${item.selectionsCount} раз`}</div>
+                    <div className="Item-counts">{` | Выделяли ${item.selectionsCount} ${getDeclination(item.selectionsCount)}`}</div>
                   )}
                 </div>
                 <div className="Item-actions">
-                  <button onClick={() => store.deleteItem(item.code)}>Удалить</button>
+                  <button id="delete-button" onClick={() => store.deleteItem(item.code)}>
+                    Удалить
+                  </button>
                 </div>
               </div>
             </div>
