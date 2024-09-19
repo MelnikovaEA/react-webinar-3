@@ -8,8 +8,8 @@ class Store {
       cart: {
         list: [],
         sum: 0,
-        qty: 0
-      }
+        qty: 0,
+      },
     };
     this.listeners = []; // Слушатели изменений состояния
   }
@@ -58,18 +58,20 @@ class Store {
       updatedCart.list = [...updatedCart.list, { ...newItem, qty: 1 }];
     } else {
       updatedCart.list = updatedCart.list.map(item =>
-        item.code === newItem.code ? { ...item, qty: (item.qty += 1) } : item
+        item.code === newItem.code ? { ...item, qty: (item.qty += 1) } : item,
       );
     }
 
-    updatedCart.qty = updatedCart.list.reduce((acc, item) => acc + item.qty, 0);
+    //подсчет количества уникальных товаров в корзине
+    updatedCart.qty = updatedCart.list.length;
+    //подсчет реального количества товара в корзине
+    //updatedCart.qty = updatedCart.list.reduce((acc, item) => acc + item.qty, 0);
     updatedCart.sum = updatedCart.list.reduce((acc, item) => acc + item.qty * item.price, 0);
 
     this.setState({
       ...this.state,
-      cart: updatedCart
+      cart: updatedCart,
     });
-    console.log('store updated')
   }
 
   /**
@@ -81,13 +83,14 @@ class Store {
 
     let updatedCart = { ...this.state.cart };
     updatedCart.list = updatedCart.list.filter(item => item.code !== deletedItem.code);
-    updatedCart.qty = updatedCart.list.reduce((acc, item) => acc + item.qty, 0);
+    updatedCart.qty = updatedCart.list.length;
+    //updatedCart.qty = updatedCart.list.reduce((acc, item) => acc + item.qty, 0);
     updatedCart.sum = updatedCart.list.reduce((acc, item) => acc + item.qty * item.price, 0);
 
     this.setState({
       ...this.state,
       // Новый список, в котором не будет удаляемой записи
-      cart: updatedCart
+      cart: updatedCart,
     });
   }
 }

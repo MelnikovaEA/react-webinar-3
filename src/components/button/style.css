@@ -4,4 +4,9 @@
   border: 1px solid #767676;
   border-radius: 3px;
   cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.Button:active {
+  opacity: 0.4;
 }

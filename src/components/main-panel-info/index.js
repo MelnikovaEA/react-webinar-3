@@ -4,32 +4,27 @@ import { plural } from '../../utils';
 
 import './style.css';
 
-function CartInfo(props) {
-  console.log('CartInfo rerender');
+function MainPanelInfo({cart = {}}) {
   return (
     <span className="CartInfo">
       В корзине:
       <span className="CartInfo_bold">
         {' '}
-        {!props.cart.qty
+        {!cart.qty
           ? 'пусто'
-          : `${props.cart.qty} ${plural(props.cart.qty, {
+          : `${cart.qty} ${plural(cart.qty, {
               one: 'товар',
               few: 'товара',
               many: 'товаров',
             })} /
-          ${props.cart.sum}  ₽`}{' '}
+          ${cart.sum.toLocaleString()}\u00A0₽`}{' '}
       </span>
     </span>
   );
 }
 
-CartInfo.propTypes = {
+MainPanelInfo.propTypes = {
   cart: PropTypes.object,
 };
 
-CartInfo.defaultProps = {
-  cart: PropTypes.object,
-};
-
-export default React.memo(CartInfo);
+export default React.memo(MainPanelInfo);
