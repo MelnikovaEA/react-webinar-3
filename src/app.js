@@ -7,6 +7,8 @@ import Modal from './components/modal';
 import Controls from './components/controls';
 import CartHeadWrapper from './components/cart-head-wrapper';
 import CartTotalInfo from './components/cart-total-info';
+import Item from './components/item';
+import CartItem from "./components/cart-item";
 
 /**
  * Приложение
@@ -40,7 +42,7 @@ function App({ store }) {
       <PageLayout>
         <Head title="Магазин" />
         <MainPanel cart={cart} onClick={() => setModalActive(true)} />
-        <List list={list} onClick={callbacks.onAddItem} buttonTitle="Добавить" />
+        <List list={list} onClick={callbacks.onAddItem} buttonTitle="Добавить" component={Item} />
       </PageLayout>
       <Modal isOpen={modalActive}>
         <CartHeadWrapper>
@@ -52,6 +54,7 @@ function App({ store }) {
           onClick={callbacks.onDeleteItem}
           buttonTitle="Удалить"
           isCart={true}
+          component={CartItem}
         />
         <CartTotalInfo sum={cart.sum} qty={cart.qty} />
       </Modal>

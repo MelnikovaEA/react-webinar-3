@@ -7,7 +7,7 @@ import './style.css';
 function MainPanelInfo({cart = {}}) {
   return (
     <span className="CartInfo">
-      В корзине:
+      <span className='CartInfo-title'> В корзине:</span>
       <span className="CartInfo_bold">
         {' '}
         {!cart.qty

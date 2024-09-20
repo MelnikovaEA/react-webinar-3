@@ -1,12 +1,11 @@
 .CartTotalInfo {
-  padding: 20px 0;
+  padding: 20px 120px 20px 0;
   display: flex;
   justify-content: flex-end;
   font-weight: 800;
 }
 
 .CartTotalInfo-data {
-  min-width: 150px;
   padding: 0 0 0 60px;
 }
 

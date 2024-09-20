@@ -58,7 +58,7 @@ class Store {
       updatedCart.list = [...updatedCart.list, { ...newItem, qty: 1 }];
     } else {
       updatedCart.list = updatedCart.list.map(item =>
-        item.code === newItem.code ? { ...item, qty: (item.qty += 1) } : item,
+        item.code === newItem.code ? { ...item, qty: item.qty + 1 } : item,
       );
     }
 

@@ -2,6 +2,10 @@
   padding: 0 10px 0 0;
 }
 
+.CartInfo-title {
+  padding-right: 15px;
+}
+
 .CartInfo_bold {
   font-weight: 600;
 }
