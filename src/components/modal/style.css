@@ -12,7 +12,7 @@
 }
 
 .Modal-content {
-  width: 65%;
+  width: 960px;
   max-height: 90vh;
   padding-bottom: 70px;
   overflow: hidden;
