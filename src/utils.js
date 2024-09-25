@@ -33,3 +33,46 @@ export function codeGenerator(start = 0) {
 export function numberFormat(value, locale = 'ru-RU', options = {}) {
   return new Intl.NumberFormat(locale, options).format(value);
 }
+
+
+/**
+ * Вычисление данных для рендера пагинации
+ * @param pagesCount {Number}
+ * @param currentPage {Number}
+ * @returns {Array}
+ */
+export const createPaginationScheme = (pagesCount, currentPage) => {
+  const pages = [];
+
+  pages.push(1);
+
+  if (currentPage === 1) {
+    pages.push(2);
+    pages.push(3);
+  }
+
+  if (currentPage > 3) {
+    pages.push('...');
+  }
+
+  if (currentPage > 2) {
+    pages.push(currentPage - 1);
+  }
+  if (currentPage > 1 && currentPage < pagesCount) {
+    pages.push(currentPage);
+  }
+  if (currentPage < pagesCount - 1 && currentPage !== 1) {
+    pages.push(currentPage + 1);
+  }
+
+  if (currentPage < pagesCount - 2) {
+    pages.push('...');
+  }
+
+  if (pagesCount > 1) {
+    pages.push(pagesCount);
+  }
+
+  return pages;
+};
+
