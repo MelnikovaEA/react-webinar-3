@@ -7,6 +7,7 @@ import BasketTool from '../../components/basket-tool';
 import LoadingPage from '../../components/loading-page';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
+import {vocabulary} from "../../vocabulary";
 
 function InfoPage() {
   const store = useStore();
@@ -26,6 +27,7 @@ function InfoPage() {
   }, [_id]);
 
   const select = useSelector(state => ({
+    language: state.language.current,
     item: state.info.item,
     status: state.info.status,
     amount: state.basket.amount,
@@ -37,6 +39,8 @@ function InfoPage() {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+    //Смена языка интерфейса
+    switchLanguage: useCallback(() => store.actions.language.switch(),[store]),
   };
 
   return (
@@ -44,9 +48,9 @@ function InfoPage() {
       {(select.status === 'loading' || select.status === 'idle') && <LoadingPage />}
       {select.status === 'fulfilled' && (
         <ItemDescriptionLayout>
-          <Head title={select.item.title} />
-          <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
-          <ItemDescription item={select.item} onClick={callbacks.addToBasket} />
+          <Head title={select.item.title} switcher={vocabulary.markers[select.language]} onClick={callbacks.switchLanguage} />
+          <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} language={select.language} />
+          <ItemDescription item={select.item} onClick={callbacks.addToBasket} language={select.language}/>
         </ItemDescriptionLayout>
       )}
     </>

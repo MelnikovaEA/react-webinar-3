@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { cn as bem } from '@bem-react/classname';
 import { numberFormat } from '../../utils';
 import './style.css';
+import {vocabulary} from "../../vocabulary";
 
 function Item(props) {
   const cn = bem('Item');
@@ -11,6 +12,8 @@ function Item(props) {
   const callbacks = {
     onAdd: e => props.onAdd(props.item._id),
   };
+
+  console.log(vocabulary.buttons.add[props.language], props.language )
 
   return (
     <div className={cn()}>
@@ -22,7 +25,7 @@ function Item(props) {
       </div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}>Добавить</button>
+        <button onClick={callbacks.onAdd}>{vocabulary.buttons.add[props.language]}</button>
       </div>
     </div>
   );
@@ -34,6 +37,7 @@ Item.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  language: PropTypes.string,
   onAdd: PropTypes.func,
 };
 

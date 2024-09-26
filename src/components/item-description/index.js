@@ -2,8 +2,9 @@ import { memo } from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 import {numberFormat} from "../../utils";
+import {vocabulary} from "../../vocabulary";
 
-function ItemDescription({ item, onClick }) {
+function ItemDescription({ item, language, onClick }) {
 
   const callbacks = {
     onAdd: e => onClick(item._id),
@@ -28,7 +29,7 @@ function ItemDescription({ item, onClick }) {
         <span>Цена: </span>
         <span className="ItemDescription-price-info">{numberFormat(item.price)} ₽</span>
       </div>
-      <button onClick={callbacks.onAdd}>Добавить</button>
+      <button onClick={callbacks.onAdd}>{vocabulary.buttons.add[language]}</button>
     </div>
   );
 }

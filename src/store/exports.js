@@ -2,4 +2,5 @@ export { default as basket } from './basket';
 export { default as catalog } from './catalog';
 export { default as modals } from './modals';
 export { default as info } from './item-info';
+export { default as language } from './app-language';
 

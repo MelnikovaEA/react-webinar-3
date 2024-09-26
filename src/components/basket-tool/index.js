@@ -4,13 +4,16 @@ import {Link} from "react-router-dom";
 import { cn as bem } from '@bem-react/classname';
 import { numberFormat, plural } from '../../utils';
 import './style.css';
+import {vocabulary} from "../../vocabulary";
 
-function BasketTool({ sum, amount, onOpen = ()=>{} }) {
+function BasketTool({ sum, amount, language, onOpen = ()=>{} }) {
   const cn = bem('BasketTool');
 
   return (
     <div className={cn()}>
-      <Link className={cn('nav')} to='/'>Главная</Link>
+      <Link className={cn('nav')} to="/">
+        {vocabulary.links.main[language]}
+      </Link>
       <span className={cn('label')}>В корзине:</span>
       <span className={cn('total')}>
         {amount
@@ -21,7 +24,9 @@ function BasketTool({ sum, amount, onOpen = ()=>{} }) {
             })} / ${numberFormat(sum)} ₽`
           : `пусто`}
       </span>
-      <button className={cn('button')} onClick={onOpen}>Перейти</button>
+      <button className={cn('button')} onClick={onOpen}>
+        {vocabulary.buttons.go[language]}
+      </button>
     </div>
   );
 }
