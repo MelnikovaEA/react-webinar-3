@@ -1,0 +1,8 @@
+button {
+  min-width: 75px;
+  background-color: #EFEFEF;
+  border: 1px solid #767676;
+  color: black;
+  padding: 2px 8px;
+  box-sizing: border-box;
+}

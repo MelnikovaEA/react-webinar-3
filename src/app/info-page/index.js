@@ -1,0 +1,56 @@
+import { memo, useCallback, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import ItemDescriptionLayout from '../../components/item-description-layout';
+import ItemDescription from '../../components/item-description';
+import Head from '../../components/head';
+import BasketTool from '../../components/basket-tool';
+import LoadingPage from '../../components/loading-page';
+import useStore from '../../store/use-store';
+import useSelector from '../../store/use-selector';
+
+function InfoPage() {
+  const store = useStore();
+  //извлекаем id товара из поисковой строки
+  const { _id } = useParams();
+
+  useEffect(() => {
+    //загрузка информации о товаре из API
+    if (_id) {
+      store.actions.info.loadItem(_id);
+    }
+
+    //функция очистки удаляет данные о предыдущем товаре перед рендером компонента
+    return () => {
+      store.actions.info.resetItem();
+    };
+  }, [_id]);
+
+  const select = useSelector(state => ({
+    item: state.info.item,
+    status: state.info.status,
+    amount: state.basket.amount,
+    sum: state.basket.sum,
+  }));
+
+  const callbacks = {
+    // Добавление в корзину
+    addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
+    // Открытие модалки корзины
+    openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+  };
+
+  return (
+    <>
+      {(select.status === 'loading' || select.status === 'idle') && <LoadingPage />}
+      {select.status === 'fulfilled' && (
+        <ItemDescriptionLayout>
+          <Head title={select.item.title} />
+          <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} />
+          <ItemDescription item={select.item} onClick={callbacks.addToBasket} />
+        </ItemDescriptionLayout>
+      )}
+    </>
+  );
+}
+
+export default memo(InfoPage);

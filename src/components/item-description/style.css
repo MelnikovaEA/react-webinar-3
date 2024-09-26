@@ -1,0 +1,27 @@
+.ItemDescription {
+  padding: 20px 40px;
+  font-size: 18px;
+}
+
+.ItemDescription-item {
+  padding: 10px 0;
+}
+
+.ItemDescription-description {
+  text-align: justify;
+}
+
+.ItemDescription-info {
+  font-weight: bold;
+}
+
+.ItemDescription-price {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.ItemDescription-price-info {
+  padding-left: 8px;
+}
+
+

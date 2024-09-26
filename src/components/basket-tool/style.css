@@ -6,10 +6,19 @@
   font-size: 18px;
 }
 
+.BasketTool-nav {
+  flex: 1;
+  color: #0087E9;
+}
+
 .BasketTool-label {
 }
 
 .BasketTool-total {
   font-weight: bold;
   margin: 0 20px;
+}
+
+.BasketTool-button {
+  align-self: center;
 }
