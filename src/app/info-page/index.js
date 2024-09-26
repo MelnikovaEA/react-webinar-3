@@ -41,6 +41,8 @@ function InfoPage() {
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     //Смена языка интерфейса
     switchLanguage: useCallback(() => store.actions.language.switch(),[store]),
+    // Возврат на первую страницу
+    returnToFirstPage: useCallback(() => store.actions.catalog.setCurrentPage(1), [store]),
   };
 
   return (
@@ -49,7 +51,7 @@ function InfoPage() {
       {select.status === 'fulfilled' && (
         <ItemDescriptionLayout>
           <Head title={select.item.title} switcher={vocabulary.markers[select.language]} onClick={callbacks.switchLanguage} />
-          <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount} sum={select.sum} language={select.language} />
+          <BasketTool onOpen={callbacks.openModalBasket} onReturn={callbacks.returnToFirstPage} amount={select.amount} sum={select.sum} language={select.language} />
           <ItemDescription item={select.item} onClick={callbacks.addToBasket} language={select.language}/>
         </ItemDescriptionLayout>
       )}

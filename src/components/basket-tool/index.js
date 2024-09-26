@@ -6,12 +6,12 @@ import { numberFormat, plural } from '../../utils';
 import './style.css';
 import {vocabulary} from "../../vocabulary";
 
-function BasketTool({ sum, amount, language, onOpen = ()=>{} }) {
+function BasketTool({ sum, amount, language, onOpen = () => {}, onReturn = () => {} }) {
   const cn = bem('BasketTool');
 
   return (
     <div className={cn()}>
-      <Link className={cn('nav')} to="/">
+      <Link className={cn('nav')} onClick={onReturn} to="/" >
         {vocabulary.links.main[language]}
       </Link>
       <span className={cn('label')}>В корзине:</span>

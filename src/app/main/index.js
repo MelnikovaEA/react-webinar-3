@@ -34,6 +34,8 @@ function Main() {
     changePage: useCallback(page => store.actions.catalog.setCurrentPage(page), [store]),
     //Смена языка интерфейса
     switchLanguage: useCallback(() => store.actions.language.switch(),[store]),
+    // Возврат на первую страницу
+    returnToFirstPage: useCallback(() => store.actions.catalog.setCurrentPage(1), [store]),
   };
 
   const renders = {
@@ -50,6 +52,7 @@ function Main() {
       <Head title={vocabulary.pages.shop[select.language]} switcher={vocabulary.markers[select.language]} onClick={callbacks.switchLanguage} />
       <BasketTool
         onOpen={callbacks.openModalBasket}
+        onReturn={callbacks.returnToFirstPage}
         amount={select.amount}
         sum={select.sum}
         language={select.language}
