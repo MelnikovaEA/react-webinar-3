@@ -13,8 +13,6 @@ function Item(props) {
     onAdd: e => props.onAdd(props.item._id),
   };
 
-  console.log(vocabulary.buttons.add[props.language], props.language )
-
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}

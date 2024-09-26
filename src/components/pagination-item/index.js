@@ -16,7 +16,7 @@ function PaginationItem(props) {
 }
 
 PaginationItem.propTypes = {
-  page: PropTypes.number || PropTypes.string,
+  page: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   currentPage: PropTypes.number,
   onClick: PropTypes.func,
 };
