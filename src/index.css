@@ -1,8 +1,11 @@
 button {
-  min-width: 75px;
+  min-width: 76px;
   background-color: #EFEFEF;
   border: 1px solid #767676;
+  border-radius: 2px;
   color: black;
-  padding: 2px 8px;
+  padding: 3px 8px 2px 9px;
   box-sizing: border-box;
+  font-size: 13px;
+  cursor: pointer;
 }

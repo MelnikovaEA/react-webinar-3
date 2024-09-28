@@ -2,7 +2,7 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from './main';
 import InfoPage from './info-page';
-import './index.css';
+import '../index.css'
 
 /**
  * Компонент приложения с внутренним роутингом
