@@ -1,19 +1,28 @@
-import {Outlet} from "react-router-dom";
-import Basket from './basket';
-import useSelector from '../store/use-selector';
-import './index.css'
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Main from './main';
+import InfoPage from './info-page';
+import './index.css';
 
 /**
- * Приложение
+ * Компонент приложения с внутренним роутингом
  * @returns {React.ReactElement}
  */
 function App() {
-  const activeModal = useSelector(state => state.modals.name);
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Main />,
+    },
+    {
+      path: '/item/:_id',
+      element: <InfoPage />,
+    },
+  ]);
 
   return (
     <>
-      <Outlet />
-      {activeModal === 'basket' && <Basket />}
+      <RouterProvider router={router} />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import Item from '../../components/item';
 import PageLayout from '../../components/page-layout';
 import Head from '../../components/head';
@@ -8,11 +8,13 @@ import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import Pagination from '../../components/pagination';
 import {vocabulary} from "../../vocabulary";
+import Basket from "../basket";
 
 function Main() {
   const store = useStore();
 
   const select = useSelector(state => ({
+    activeModal: state.modals.name,
     language: state.language.current,
     list: state.catalog.list,
     currentPage: state.catalog.currentPage,
@@ -49,6 +51,7 @@ function Main() {
 
   return (
     <PageLayout>
+      {select.activeModal === 'basket' && <Basket />}
       <Head title={vocabulary.pages.shop[select.language]} switcher={vocabulary.markers[select.language]} onClick={callbacks.switchLanguage} />
       <BasketTool
         onOpen={callbacks.openModalBasket}
