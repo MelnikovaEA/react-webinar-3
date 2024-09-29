@@ -76,3 +76,25 @@ export const createPaginationScheme = (pagesCount, currentPage) => {
   return pages;
 };
 
+/**
+ * Получение текста в зависимости от текущего языка приложения
+ * @param key {String}
+ * @param lang {String}
+ * @param database {Object}
+ * @returns {String}
+ */
+export const translate = (key, lang, database) => {
+
+  const keys = key.split('.');
+  let text = database;
+
+  for (let k of keys) {
+    if (text[k] !== undefined) {
+      text = text[k];
+    } else {
+      return key;
+    }
+  }
+
+  return text[lang] || '';
+};

@@ -1,8 +1,10 @@
 .Navigation {
   flex: 1;
+  padding: 20px;
 }
 
 .Navigation-item {
   color: #0087E9;
+  font-size: 18px;
 }
 

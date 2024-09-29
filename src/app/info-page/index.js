@@ -7,8 +7,11 @@ import BasketTool from '../../components/basket-tool';
 import LoadingPage from '../../components/loading-page';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
-import {vocabulary} from "../../vocabulary";
-import Basket from "../basket";
+import { vocabulary } from '../../vocabulary';
+import { translate } from '../../utils';
+import Basket from '../basket';
+import Navigation from "../../components/navigation";
+import ToolsPanel from "../../components/tools-panel";
 
 function InfoPage() {
   const store = useStore();
@@ -42,7 +45,7 @@ function InfoPage() {
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     //Смена языка интерфейса
-    switchLanguage: useCallback(() => store.actions.language.switch(),[store]),
+    switchLanguage: useCallback(() => store.actions.language.switch(), [store]),
     // Возврат на первую страницу
     returnToFirstPage: useCallback(() => store.actions.catalog.setCurrentPage(1), [store]),
   };
@@ -53,9 +56,36 @@ function InfoPage() {
       {select.status === 'fulfilled' && (
         <ItemDescriptionLayout>
           {select.activeModal === 'basket' && <Basket />}
-          <Head title={select.item.title} switcher={vocabulary.markers[select.language]} onClick={callbacks.switchLanguage} />
-          <BasketTool onOpen={callbacks.openModalBasket} onReturn={callbacks.returnToFirstPage} amount={select.amount} sum={select.sum} language={select.language} />
-          <ItemDescription item={select.item} onClick={callbacks.addToBasket} language={select.language}/>
+          <Head
+            title={select.item.title}
+            switcher={translate('markers', select.language, vocabulary)}
+            onClick={callbacks.switchLanguage}
+          />
+          <ToolsPanel>
+            <Navigation
+              onClick={callbacks.returnToFirstPage}
+              title={translate('links.main', select.language, vocabulary)}
+            />
+            <BasketTool
+              onOpen={callbacks.openModalBasket}
+              amount={select.amount}
+              sum={select.sum}
+              text={translate('basketInfo.inBasket', select.language, vocabulary)}
+              infoEmpty={translate('basketInfo.emptyBasket', select.language, vocabulary)}
+              buttonTitle={translate('buttons.go', select.language, vocabulary)}
+              language={select.language}
+            />
+          </ToolsPanel>
+          <ItemDescription
+            item={select.item}
+            onClick={callbacks.addToBasket}
+            language={select.language}
+            country={translate('itemInfo.country', select.language, vocabulary)}
+            category={translate('itemInfo.category', select.language, vocabulary)}
+            dateOfIssue={translate('itemInfo.dateOfIssue', select.language, vocabulary)}
+            price={translate('itemInfo.price', select.language, vocabulary)}
+            buttonTitle={translate('buttons.add', select.language, vocabulary)}
+          />
         </ItemDescriptionLayout>
       )}
     </>

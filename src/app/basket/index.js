@@ -6,6 +6,7 @@ import BasketTotal from '../../components/basket-total';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import { vocabulary } from '../../vocabulary';
+import { translate } from '../../utils';
 
 function Basket() {
   const store = useStore();
@@ -32,8 +33,9 @@ function Basket() {
             item={item}
             onRemove={callbacks.removeFromBasket}
             onClick={callbacks.closeModal}
-            language={select.language}
             route="/item/"
+            buttonTitle={translate('buttons.delete', select.language, vocabulary)}
+            qtyTitle={translate('itemInfo.qty', select.language, vocabulary)}
           />
         );
       },
@@ -42,9 +44,16 @@ function Basket() {
   };
 
   return (
-    <ModalLayout title={vocabulary.pages.basket[select.language]} onClose={callbacks.closeModal}>
+    <ModalLayout
+      title={translate('pages.basket', select.language, vocabulary)}
+      onClose={callbacks.closeModal}
+      buttonTitle={translate('buttons.close', select.language, vocabulary)}
+    >
       <List list={select.list} renderItem={renders.itemBasket} />
-      <BasketTotal sum={select.sum} />
+      <BasketTotal
+        sum={select.sum}
+        title={translate('basketInfo.totalPrice', select.language, vocabulary)}
+      />
     </ModalLayout>
   );
 }

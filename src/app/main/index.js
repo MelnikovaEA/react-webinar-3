@@ -9,6 +9,9 @@ import useSelector from '../../store/use-selector';
 import Pagination from '../../components/pagination';
 import { vocabulary } from '../../vocabulary';
 import Basket from '../basket';
+import { translate } from '../../utils';
+import ToolsPanel from '../../components/tools-panel';
+import Navigation from '../../components/navigation';
 
 function Main() {
   const store = useStore();
@@ -47,8 +50,8 @@ function Main() {
           <Item
             item={item}
             onAdd={callbacks.addToBasket}
-            language={select.language}
             route="/item/"
+            buttonTitle={translate('buttons.add', select.language, vocabulary)}
           />
         );
       },
@@ -60,17 +63,25 @@ function Main() {
     <PageLayout>
       {select.activeModal === 'basket' && <Basket />}
       <Head
-        title={vocabulary.pages.shop[select.language]}
-        switcher={vocabulary.markers[select.language]}
+        title={translate('pages.shop', select.language, vocabulary)}
+        switcher={translate('markers', select.language, vocabulary)}
         onClick={callbacks.switchLanguage}
       />
-      <BasketTool
-        onOpen={callbacks.openModalBasket}
-        onReturn={callbacks.returnToFirstPage}
-        amount={select.amount}
-        sum={select.sum}
-        language={select.language}
-      />
+      <ToolsPanel>
+        <Navigation
+          onClick={callbacks.returnToFirstPage}
+          title={translate('links.main', select.language, vocabulary)}
+        />
+        <BasketTool
+          onOpen={callbacks.openModalBasket}
+          amount={select.amount}
+          sum={select.sum}
+          text={translate('basketInfo.inBasket', select.language, vocabulary)}
+          infoEmpty={translate('basketInfo.emptyBasket', select.language, vocabulary)}
+          buttonTitle={translate('buttons.go', select.language, vocabulary)}
+          language={select.language}
+        />
+      </ToolsPanel>
       <List list={select.list} renderItem={renders.item} />
       <Pagination
         pagesCount={select.pagesCount}
