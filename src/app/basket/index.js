@@ -5,7 +5,7 @@ import ModalLayout from '../../components/modal-layout';
 import BasketTotal from '../../components/basket-total';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
-import {vocabulary} from "../../vocabulary";
+import { vocabulary } from '../../vocabulary';
 
 function Basket() {
   const store = useStore();
@@ -27,7 +27,15 @@ function Basket() {
   const renders = {
     itemBasket: useCallback(
       item => {
-        return <ItemBasket item={item} onRemove={callbacks.removeFromBasket} onClick={callbacks.closeModal} language={select.language} />;
+        return (
+          <ItemBasket
+            item={item}
+            onRemove={callbacks.removeFromBasket}
+            onClick={callbacks.closeModal}
+            language={select.language}
+            route="/item/"
+          />
+        );
       },
       [callbacks.removeFromBasket, select.language],
     ),

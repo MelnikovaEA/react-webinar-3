@@ -17,7 +17,7 @@ function Item(props) {
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <div className={cn('title')}>
-        <Link to={`item/${props.item._id}`} className={cn('title-link')}>
+        <Link to={`${props.route}${props.item._id}`} className={cn('title-link')}>
           {props.item.title}
         </Link>
       </div>
@@ -35,6 +35,7 @@ Item.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  route: PropTypes.string,
   language: PropTypes.string,
   onAdd: PropTypes.func,
 };

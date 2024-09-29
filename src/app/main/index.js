@@ -7,8 +7,8 @@ import List from '../../components/list';
 import useStore from '../../store/use-store';
 import useSelector from '../../store/use-selector';
 import Pagination from '../../components/pagination';
-import {vocabulary} from "../../vocabulary";
-import Basket from "../basket";
+import { vocabulary } from '../../vocabulary';
+import Basket from '../basket';
 
 function Main() {
   const store = useStore();
@@ -35,7 +35,7 @@ function Main() {
     // Клик на элемент пагинации
     changePage: useCallback(page => store.actions.catalog.setCurrentPage(page), [store]),
     //Смена языка интерфейса
-    switchLanguage: useCallback(() => store.actions.language.switch(),[store]),
+    switchLanguage: useCallback(() => store.actions.language.switch(), [store]),
     // Возврат на первую страницу
     returnToFirstPage: useCallback(() => store.actions.catalog.setCurrentPage(1), [store]),
   };
@@ -43,7 +43,14 @@ function Main() {
   const renders = {
     item: useCallback(
       item => {
-        return <Item item={item} onAdd={callbacks.addToBasket} language={select.language} />;
+        return (
+          <Item
+            item={item}
+            onAdd={callbacks.addToBasket}
+            language={select.language}
+            route="/item/"
+          />
+        );
       },
       [callbacks.addToBasket, select.language],
     ),
@@ -52,7 +59,11 @@ function Main() {
   return (
     <PageLayout>
       {select.activeModal === 'basket' && <Basket />}
-      <Head title={vocabulary.pages.shop[select.language]} switcher={vocabulary.markers[select.language]} onClick={callbacks.switchLanguage} />
+      <Head
+        title={vocabulary.pages.shop[select.language]}
+        switcher={vocabulary.markers[select.language]}
+        onClick={callbacks.switchLanguage}
+      />
       <BasketTool
         onOpen={callbacks.openModalBasket}
         onReturn={callbacks.returnToFirstPage}

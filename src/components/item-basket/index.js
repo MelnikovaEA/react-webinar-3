@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import propTypes from 'prop-types';
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom';
 import { numberFormat } from '../../utils';
 import { cn as bem } from '@bem-react/classname';
 import PropTypes from 'prop-types';
 import './style.css';
-import {vocabulary} from "../../vocabulary";
+import { vocabulary } from '../../vocabulary';
 
 function ItemBasket(props) {
   const cn = bem('ItemBasket');
@@ -20,7 +20,7 @@ function ItemBasket(props) {
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <div className={cn('title')}>
         <Link
-          to={`item/${props.item._id}`}
+          to={`${props.route}${props.item._id}`}
           className={cn('title-link')}
           onClick={callbacks.onClick}
         >
@@ -45,6 +45,7 @@ ItemBasket.propTypes = {
     price: PropTypes.number,
     amount: PropTypes.number,
   }).isRequired,
+  route: PropTypes.string,
   onRemove: propTypes.func,
   onClick: propTypes.func,
 };
