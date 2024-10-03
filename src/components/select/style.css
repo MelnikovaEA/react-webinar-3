@@ -1,29 +1,43 @@
 .Select {
+  position: relative;
+  background-color: #fff;
   font-size: 16px;
-  padding: 2px 5px;
-  width: 160px;
-  min-height: 26px;
+  padding: 4px;
   border: 1px solid #767676;
   border-radius: 1px;
   color: black;
-  background-color: white;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+}
+
+.Select-main {
+  cursor: pointer;
+  background-color: #fff;
   padding-right: 30px;
   background-image: url('src/assets/icons/arrow-down.png');
   background-repeat: no-repeat;
   background-position: right 5px center;
-  outline: none;
 }
 
-.Select-option {
+.Select-list {
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: -1px;
+  right: 0;
+  border: 1px solid #767676;
+  box-shadow: 1px 1px 6px #767676;
   background-color: #fff;
-  color: #333;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  padding: 5px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 1000;
 }
 
+.Select-list li {
+  padding: 4px;
+  cursor: pointer;
+}
 
+.Select-list li:hover {
+  background-color: #0087E9;
+}
 

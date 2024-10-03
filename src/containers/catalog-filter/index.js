@@ -47,13 +47,13 @@ function CatalogFilter() {
 
   return (
     <SideLayout padding="medium">
-      <Select options={options.category} value={select.category} onChange={callbacks.onCategory} />
-      <Select options={options.sort} value={select.sort} onChange={callbacks.onSort} />
+      <Select options={options.category} value={select.category} onChange={callbacks.onCategory} style={{width:'160px'}} />
+      <Select options={options.sort} value={select.sort} onChange={callbacks.onSort} style={{width:'160px'}} />
       <Input
         theme='big'
         value={select.query}
         onChange={callbacks.onSearch}
-        placeholder={'Поиск'}
+        placeholder={t('filter.search')}
         delay={1000}
       />
       <button onClick={callbacks.onReset}>{t('filter.reset')}</button>

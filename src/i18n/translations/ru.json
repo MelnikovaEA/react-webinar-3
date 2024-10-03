@@ -15,6 +15,7 @@
   "article.dateOfIssue": "Год выпуска",
   "article.price": "Цена",
   "filter.reset": "Сбросить",
+  "filter.search": "Поиск",
   "basket.articles": {
     "one": "товар",
     "few": "товара",

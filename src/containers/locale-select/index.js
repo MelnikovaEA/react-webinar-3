@@ -20,7 +20,7 @@ function LocaleSelect() {
     ),
   };
 
-  return <Select onChange={setLang} value={lang} options={options.lang} />;
+  return <Select onChange={setLang} value={lang} options={options.lang} style={{ width: '90px' }} />;
 }
 
 export default memo(LocaleSelect);

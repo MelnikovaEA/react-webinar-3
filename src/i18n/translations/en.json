@@ -15,6 +15,7 @@
   "article.dateOfIssue": "Date of issue",
   "article.price": "Price",
   "filter.reset": "Reset",
+  "filter.search": "Search",
   "basket.articles": {
     "one": "article",
     "other": "articles"

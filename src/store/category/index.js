@@ -60,7 +60,7 @@ class CategoryState extends StoreModule {
     }
 
     result.forEach(item => {
-      categories.push({ value: item._id, title: '-'.repeat(depth) + item.title});
+      categories.push({ value: item._id, title: ' - '.repeat(depth) + item.title});
 
       if (item.children.length > 0) {
         categories = categories.concat(this.getCategories(item.children, depth + 1, false));
