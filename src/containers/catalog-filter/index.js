@@ -47,8 +47,8 @@ function CatalogFilter() {
 
   return (
     <SideLayout padding="medium">
-      <Select options={options.category} value={select.category} onChange={callbacks.onCategory} style={{width:'160px'}} />
-      <Select options={options.sort} value={select.sort} onChange={callbacks.onSort} style={{width:'160px'}} />
+      <Select options={options.category} value={select.category} onChange={callbacks.onCategory} style={{minWidth:'160px'}} />
+      <Select options={options.sort} value={select.sort} onChange={callbacks.onSort} style={{minWidth:'160px'}} />
       <Input
         theme='big'
         value={select.query}
