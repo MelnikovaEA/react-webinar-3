@@ -9,7 +9,6 @@ class ProfileState extends StoreModule {
       login: '',
       password: '',
       isAuth: false,
-      //token: '',
       error: '',
       waiting: false,
       user: {},

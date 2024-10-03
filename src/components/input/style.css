@@ -1,8 +1,20 @@
 .Input {
   font-size: 16px;
   padding: 2px;
+  border: 1px solid #767676;
+  border-radius: 1px;
+  color: black;
+  outline: none;
+}
+
+.Input::placeholder {
+  color: black;
 }
 
 .Input_theme_big {
   width: 300px;
+}
+
+.Input_theme_small {
+  width: 200px;
 }

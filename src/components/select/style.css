@@ -1,4 +1,29 @@
 .Select {
   font-size: 16px;
-  padding: 3px 2px 2px;
+  padding: 2px 5px;
+  width: 160px;
+  min-height: 26px;
+  border: 1px solid #767676;
+  border-radius: 1px;
+  color: black;
+  background-color: white;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 30px;
+  background-image: url('src/assets/icons/arrow-down.png');
+  background-repeat: no-repeat;
+  background-position: right 5px center;
+  outline: none;
 }
+
+.Select-option {
+  background-color: #fff;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  padding: 5px;
+}
+
+
+

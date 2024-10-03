@@ -1,0 +1,24 @@
+.AuthForm {
+  padding: 20px;
+}
+
+.AuthForm-header {
+  font-size: 24px;
+  margin: 30px 0;
+}
+
+.AuthForm-item {
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.AuthForm-item-title {
+  font-size: 16px;
+}
+
+.AuthForm-error {
+  color: red;
+  font-size: 16px;
+  padding-bottom: 20px;
+}
