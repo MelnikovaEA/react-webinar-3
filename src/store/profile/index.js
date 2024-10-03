@@ -106,7 +106,7 @@ class ProfileState extends StoreModule {
 
     if (token) {
       try {
-        const response = await fetch(`/api/v1/users/sign`, {
+        await fetch(`/api/v1/users/sign`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
