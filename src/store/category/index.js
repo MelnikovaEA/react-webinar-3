@@ -48,19 +48,24 @@ class CategoryState extends StoreModule {
    * функция формирования массива категорий для рендера
    * @param [result] {Array}
    * @param [depth] {Number}
+   * @param [includeAll] {boolean}
    * @return {Array}
    */
-  getCategories (result, depth = 0){
+  getCategories (result, depth = 0, includeAll = true) {
     let categories = [];
+
+    // Добавляем "Все" только при первом вызове функции
+    if (includeAll) {
+      categories.push({ value: '', title: 'Все' });
+    }
+
     result.forEach(item => {
       categories.push({ value: item._id, title: '-'.repeat(depth) + item.title});
 
       if (item.children.length > 0) {
-        categories = categories.concat(this.getCategories(item.children, depth + 1));
+        categories = categories.concat(this.getCategories(item.children, depth + 1, false));
       }
     });
-
-    categories.unshift({ value: '', title: 'Все'});
 
     return categories;
   }
