@@ -62,13 +62,9 @@ class CatalogState extends StoreModule {
   async setParams(newParams = {}, replaceHistory = false) {
 
     const currentParams = { ...this.getState().params };
-    // проверяем изменилась ли категория
-    const categoryChanged = newParams.hasOwnProperty('category');
     const params = {
       ...currentParams,
       ...newParams,
-      // если категория поменялась, сбрасываем номер страницы на первую
-      page: categoryChanged ? 1 : currentParams.page,
     };
 
     // Установка новых параметров и признака загрузки
@@ -83,6 +79,7 @@ class CatalogState extends StoreModule {
 
     // Сохранить параметры в адрес страницы
     let urlSearch = new URLSearchParams(params).toString();
+    console.log(urlSearch, this.getState().params);
     const url = window.location.pathname + '?' + urlSearch + window.location.hash;
     if (replaceHistory) {
       window.history.replaceState({}, '', url);

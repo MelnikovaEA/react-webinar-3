@@ -4,6 +4,17 @@ body {
   background: #535353;
   font-family: sans-serif;
 }
+button {
+  min-width: 76px;
+  background-color: #EFEFEF;
+  border: 1px solid #767676;
+  border-radius: 2px;
+  color: black;
+  padding: 3px 8px 2px 9px;
+  box-sizing: border-box;
+  font-size: 13px;
+  cursor: pointer;
+}
 
 .PageLayout {
   max-width: 1024px;
