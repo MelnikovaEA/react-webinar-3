@@ -16,13 +16,14 @@ function App() {
 
   const select = useSelector(state => ({
     isAuth: state.profile.isAuth,
+    waiting: state.profile.waiting,
   }));
 
   const activeModal = useSelector(state => state.modals.name);
 
   //если пользователь не авторизован - перенаправление на страницу авторизации
   useEffect(() => {
-    if (!select.isAuth) {
+    if (!select.isAuth && select.waiting) {
       navigate(`/login`);
     }
   }, []);
