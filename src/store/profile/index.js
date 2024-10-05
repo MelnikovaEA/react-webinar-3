@@ -56,6 +56,18 @@ class ProfileState extends StoreModule {
     );
   }
 
+  // очистка сообщения об ошибке
+  cleanError() {
+    this.setState(
+      {
+        ...this.getState(),
+        error: '',
+        waiting: false,
+      },
+      'Текст ошибки сброшен',
+    );
+  }
+
   // сохранение информации об ошибке в случае неудачной попытки авторизации
   setErrorData(error) {
     this.setState(

@@ -9,6 +9,10 @@ function AuthForm( props ) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    props.cleanErrorMessage();
+  }, [])
+
+  useEffect(() => {
     if (props.isAuth && props.id) {
       navigate(`/profile/${props.id}`);
     }

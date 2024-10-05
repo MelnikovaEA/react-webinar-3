@@ -32,6 +32,8 @@ function Authentication() {
     onSetPassword: useCallback(password => store.actions.profile.setPassword(password), [store]),
     // Попытка авторизации
     onEnter: useCallback(() => store.actions.profile.enter(), [store]),
+    // Очистить сообщение об ошибке
+    cleanErrorMessage: useCallback(() => store.actions.profile.cleanError(), [store])
   };
 
   const { t } = useTranslate();
@@ -49,6 +51,7 @@ function Authentication() {
           onSetLogin={callbacks.onSetLogin}
           onSetPassword={callbacks.onSetPassword}
           onEnter={callbacks.onEnter}
+          cleanErrorMessage={callbacks.cleanErrorMessage}
           login={select.login}
           password={select.password}
           error={select.error}
