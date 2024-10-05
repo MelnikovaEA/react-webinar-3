@@ -10,7 +10,7 @@ class CategoryState extends StoreModule {
    */
   initState() {
     return {
-      categories: [],
+      categories: [{ value: '', title: 'Все' }],
       waiting: false,
     };
   }

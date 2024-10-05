@@ -17,7 +17,7 @@ function Authentication() {
   const store = useStore();
 
   const select = useSelector(state => ({
-    waiting: state.article.waiting,
+    waiting: state.profile.waiting,
     login: state.profile.login,
     password: state.profile.password,
     error: state.profile.error,
@@ -46,18 +46,18 @@ function Authentication() {
       </Head>
       <Navigation />
       <Spinner active={select.waiting}>
-        <AuthForm
-          t={t}
-          onSetLogin={callbacks.onSetLogin}
-          onSetPassword={callbacks.onSetPassword}
-          onEnter={callbacks.onEnter}
-          cleanErrorMessage={callbacks.cleanErrorMessage}
-          login={select.login}
-          password={select.password}
-          error={select.error}
-          isAuth={select.isAuth}
-          id={select.id}
-        />
+          <AuthForm
+            t={t}
+            onSetLogin={callbacks.onSetLogin}
+            onSetPassword={callbacks.onSetPassword}
+            onEnter={callbacks.onEnter}
+            cleanErrorMessage={callbacks.cleanErrorMessage}
+            login={select.login}
+            password={select.password}
+            error={select.error}
+            isAuth={select.isAuth}
+            id={select.id}
+          />
       </Spinner>
     </PageLayout>
   );

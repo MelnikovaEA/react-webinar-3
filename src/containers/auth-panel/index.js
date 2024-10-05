@@ -6,23 +6,12 @@ import AuthLink from "../../components/auth-link";
 import AuthButton from "../../components/auth-button";
 import useStore from "../../hooks/use-store";
 import {useNavigate} from "react-router-dom";
-import useInit from "../../hooks/use-init";
 
 /**
  * Контейнер с панелью авторизациии
  */
 function AuthPanel() {
-
   const store = useStore();
-
-  useInit(
-    () => {
-      store.actions.profile.checkAuth();
-    },
-    [],
-    true,
-  );
-
   const navigate = useNavigate();
 
   const select = useSelector(state => ({
@@ -35,7 +24,8 @@ function AuthPanel() {
     // Выход из личного кабинета
     onExit: useCallback(async() => {
       await store.actions.profile.exit();
-      navigate(`/login`);
+      await store.actions.profileCard.resetUser();
+      navigate(`/login`, {replace: true});
     }, [store, navigate]),
   };
 

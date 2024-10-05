@@ -128,6 +128,8 @@ class ProfileState extends StoreModule {
 
         // удаляем токен из local storage
         localStorage.removeItem('authToken');
+        // очистка кук
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         // возвращаем стейт к начальному состоянию
         this.setState(this.initState(), 'Выход выполнен');
       } catch (error) {

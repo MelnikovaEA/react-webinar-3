@@ -5,12 +5,12 @@ import './style.css';
 import Input from '../input';
 import { useNavigate } from 'react-router-dom';
 
-function AuthForm( props ) {
+function AuthForm(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
     props.cleanErrorMessage();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (props.isAuth && props.id) {
@@ -58,6 +58,15 @@ function AuthForm( props ) {
 
 AuthForm.propTypes = {
   t: PropTypes.func.isRequired,
+  onSetLogin: PropTypes.func,
+  onSetPassword: PropTypes.func,
+  onEnter: PropTypes.func,
+  cleanErrorMessage: PropTypes.func,
+  login: PropTypes.string,
+  password: PropTypes.string,
+  error: PropTypes.string,
+  isAuth: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 export default memo(AuthForm);
