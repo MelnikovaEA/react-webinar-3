@@ -62,7 +62,7 @@ class ProfileState extends StoreModule {
       {
         ...this.getState(),
         isAuth: false,
-        error: error.message,
+        error: error?.data?.issues[0]?.message || 'Ошибка авторизации',
         waiting: false,
       },
       'Ошибка авторизации',
@@ -164,11 +164,11 @@ class ProfileState extends StoreModule {
         body: JSON.stringify({ login, password }),
       });
 
-      if (!response.ok) {
-        throw new Error('Ошибка авторизации');
-      }
-
       const data = await response.json();
+
+      if (!response.ok) {
+        throw data.error;
+      }
 
       // Сохраняем токен в localStorage
       localStorage.setItem('authToken', data.result.token);

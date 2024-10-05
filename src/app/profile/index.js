@@ -14,22 +14,12 @@ import { useNavigate } from 'react-router-dom';
  * Страница информации о пользователе
  */
 function Profile() {
-  const navigate = useNavigate();
-
   const select = useSelector(state => ({
     waiting: state.article.waiting,
     name: state.profile.user?.profile?.name || '',
     phone: state.profile.user?.profile?.phone || '',
     email: state.profile.user?.email || '',
-    isAuth: state.profile.isAuth,
   }));
-
-  //если пользователь не авторизован - перенаправление на страницу авторизации
-  useEffect(() => {
-    if (!select.isAuth) {
-      navigate(`/login`);
-    }
-  });
 
   const { t } = useTranslate();
 

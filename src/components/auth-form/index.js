@@ -1,38 +1,18 @@
-import { memo, useCallback, useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
 import Input from '../input';
-import useStore from '../../hooks/use-store';
-import useSelector from '../../hooks/use-selector';
 import { useNavigate } from 'react-router-dom';
 
-function AuthForm({ t }) {
-  const store = useStore();
+function AuthForm( props ) {
   const navigate = useNavigate();
 
-  const select = useSelector(state => ({
-    login: state.profile.login,
-    password: state.profile.password,
-    error: state.profile.error,
-    isAuth: state.profile.isAuth,
-    id: state.profile.user?._id || '',
-  }));
-
   useEffect(() => {
-    if (select.isAuth && select.id) {
-      navigate(`/profile/${select.id}`);
+    if (props.isAuth && props.id) {
+      navigate(`/profile/${props.id}`);
     }
-  }, [select.isAuth, select.id]);
-
-  const callbacks = {
-    // Ввод логина
-    onSetLogin: useCallback(login => store.actions.profile.setLogin(login), [store]),
-    // Ввод пароля
-    onSetPassword: useCallback(password => store.actions.profile.setPassword(password), [store]),
-    // Попытка авторизации
-    onEnter: useCallback(() => store.actions.profile.enter(), [store]),
-  };
+  }, [props.isAuth, props.id]);
 
   const cn = bem('AuthForm');
   return (
@@ -41,32 +21,32 @@ function AuthForm({ t }) {
         className={cn('form')}
         onSubmit={e => {
           e.preventDefault();
-          callbacks.onEnter();
+          props.onEnter();
         }}
       >
-        <h2 className={cn('header')}>{t('auth.title')}</h2>
+        <h2 className={cn('header')}>{props.t('auth.title')}</h2>
         <div className={cn('item')}>
-          <span className={cn('item-title')}>{t('auth.login')}</span>
+          <span className={cn('item-title')}>{props.t('auth.login')}</span>
           <Input
             theme="small"
-            value={select.login}
-            onChange={callbacks.onSetLogin}
+            value={props.login}
+            onChange={props.onSetLogin}
             type="text"
             delay={1000}
           />
         </div>
         <div className={cn('item')}>
-          <span className={cn('item-title')}>{t('auth.password')}</span>
+          <span className={cn('item-title')}>{props.t('auth.password')}</span>
           <Input
             theme="small"
-            value={select.password}
-            onChange={callbacks.onSetPassword}
+            value={props.password}
+            onChange={props.onSetPassword}
             type="password"
             delay={1000}
           />
         </div>
-        {select.error && <div className={cn('error')}>{select.error}</div>}
-        <button onClick={callbacks.onEnter}>{t('auth.enter')}</button>
+        {props.error && <div className={cn('error')}>{props.error}</div>}
+        <button onClick={props.onEnter}>{props.t('auth.enter')}</button>
       </form>
     </div>
   );
