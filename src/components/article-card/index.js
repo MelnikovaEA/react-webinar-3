@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import numberFormat from '../../utils/number-format';
 import './style.css';
+import Comments from '../../components/comments';
 
 function ArticleCard(props) {
-  const { article, onAdd = () => {}, t = text => text } = props;
+  const { article, onAdd = () => {}, t = text => text, comments } = props;
   const cn = bem('ArticleCard');
   return (
     <div className={cn()}>
@@ -29,6 +30,7 @@ function ArticleCard(props) {
         <div className={cn('value')}>{numberFormat(article.price)} ₽</div>
       </div>
       <button onClick={() => onAdd(article._id)}>{t('article.add')}</button>
+      <Comments comments={comments} />
     </div>
   );
 }
@@ -44,6 +46,7 @@ ArticleCard.propTypes = {
   }).isRequired,
   onAdd: PropTypes.func,
   t: PropTypes.func,
+  comments: PropTypes.array
 };
 
 export default memo(ArticleCard);

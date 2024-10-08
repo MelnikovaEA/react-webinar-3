@@ -1,0 +1,18 @@
+.Comments {
+  padding-top: 50px;
+}
+
+.Comments-title {
+  /*text-align: right;*/
+  font-size: 24px;
+  line-height: 28px;
+  white-space: nowrap;
+}
+
+.Comments-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
