@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import shallowequal from 'shallowequal';
 import articleActions from '../../store-redux/article/actions';
 import commentsActions from '../../store-redux/comments/actions';
+//import commentActions from '../../store-redux/comment/actions';
 import treeToList from '../../utils/tree-to-list';
 import listToTree from '../../utils/list-to-tree';
 
@@ -41,6 +42,7 @@ function Article() {
       article: state.article.data,
       comments: state.comments.data,
       waiting: state.article.waiting && state.comments.waiting,
+      session: store.getState().session.exists
     }),
     shallowequal,
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
@@ -85,6 +87,8 @@ function Article() {
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
+    // отправка коммента в ответ на коммент
+    //replyComment: useCallback(() => dispatch(commentActions.reply(params)), [])
   };
 
   return (
@@ -98,8 +102,10 @@ function Article() {
         <ArticleCard
           article={select.article}
           onAdd={callbacks.addToBasket}
+          replyComment={callbacks.replyComment}
           t={t}
           comments={transformedComments}
+          session={select.session}
         />
       </Spinner>
     </PageLayout>

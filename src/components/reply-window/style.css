@@ -1,0 +1,14 @@
+.ReplyWindow {
+  width: 100%
+}
+
+.ReplyWindow-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ReplyWindow-controls {
+  display: flex;
+  justify-content: flex-start;
+}

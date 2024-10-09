@@ -6,7 +6,14 @@ import './style.css';
 import Comments from '../../components/comments';
 
 function ArticleCard(props) {
-  const { article, onAdd = () => {}, t = text => text, comments } = props;
+  const {
+    article,
+    onAdd = () => {},
+    t = text => text,
+    comments,
+    session,
+  } = props;
+
   const cn = bem('ArticleCard');
   return (
     <div className={cn()}>
@@ -30,7 +37,10 @@ function ArticleCard(props) {
         <div className={cn('value')}>{numberFormat(article.price)} ₽</div>
       </div>
       <button onClick={() => onAdd(article._id)}>{t('article.add')}</button>
-      <Comments comments={comments} />
+      <Comments
+        comments={comments}
+        session={session}
+      />
     </div>
   );
 }
@@ -46,7 +56,7 @@ ArticleCard.propTypes = {
   }).isRequired,
   onAdd: PropTypes.func,
   t: PropTypes.func,
-  comments: PropTypes.array
+  comments: PropTypes.array,
 };
 
 export default memo(ArticleCard);

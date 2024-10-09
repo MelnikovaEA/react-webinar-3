@@ -3,7 +3,9 @@
   flex-direction: column;
   align-items: flex-start;
   font-size: 12px;
-  padding-top: 25px;
+  padding-bottom: 30px;
+  width: 100%;
+  flex: 1;
 }
 
 .Comment-author {
@@ -22,4 +24,28 @@
 .Comment-action {
   color: #0087E9;
 }
+
+.Comment-reply {
+  padding-top: 30px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.Comment-link {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+
+.Comment-link a {
+  margin: 0;
+  padding: 0;
+  color: #0087E9;
+}
+
+.Comment-link span {
+  color: #666666;
+  text-decoration: underline;
+}
+
 
