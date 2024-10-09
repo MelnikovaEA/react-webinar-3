@@ -1,15 +1,23 @@
 import { memo } from 'react';
-import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import useTranslate from '../../hooks/use-translate';
 import dateFormat from '../../utils/date-format';
 import './style.css';
 import { Link } from 'react-router-dom';
 import ReplyWindow from '../reply-window';
+import {useDispatch} from "react-redux";
+import commentActions from '../../store-redux/comment/actions';
 
 function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply }) {
   const cn = bem('Comment');
   const { t } = useTranslate();
+
+  const dispatch = useDispatch();
+
+  // Функция для отправки комментария
+  const handleReplySubmit = (data) => {
+    dispatch(commentActions.reply(data)); // Отправляем комментарий через Redux action
+  };
 
   return (
     <div className={cn()}>
@@ -27,8 +35,10 @@ function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply
         (session ? (
           <div className={cn('reply')}>
             <ReplyWindow
+              id={id}
               onToggleReply={onToggleReply}
               theme="fullWidth"
+              onSubmitReply={handleReplySubmit}
             />
           </div>
         ) : (
@@ -42,10 +52,5 @@ function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply
     </div>
   );
 }
-
-Comment.propTypes = {
-  // sum: PropTypes.number,
-  // t: PropTypes.func,
-};
 
 export default memo(Comment);

@@ -56,7 +56,7 @@ ArticleCard.propTypes = {
   }).isRequired,
   onAdd: PropTypes.func,
   t: PropTypes.func,
-  comments: PropTypes.array,
+  comments: PropTypes.object,
 };
 
 export default memo(ArticleCard);

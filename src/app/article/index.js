@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import shallowequal from 'shallowequal';
 import articleActions from '../../store-redux/article/actions';
 import commentsActions from '../../store-redux/comments/actions';
-//import commentActions from '../../store-redux/comment/actions';
 import treeToList from '../../utils/tree-to-list';
 import listToTree from '../../utils/list-to-tree';
 
@@ -87,8 +86,6 @@ function Article() {
   const callbacks = {
     // Добавление в корзину
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
-    // отправка коммента в ответ на коммент
-    //replyComment: useCallback(() => dispatch(commentActions.reply(params)), [])
   };
 
   return (
