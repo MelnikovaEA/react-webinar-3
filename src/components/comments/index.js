@@ -10,6 +10,20 @@ function Comments(props) {
   const cn = bem('Comments');
   const { t } = useTranslate();
 
+  const renderComments = (items) => {
+    return items.map(item => {
+      return <div className={'item'} data-level={item.level} key={item.dateCreate} style={{paddingLeft: `${item.level * 30}px`}}>
+        <Comment
+          key={item.dateCreate}
+          name={item.author || 'anonymous'}
+          dateCreate={item.dateCreate}
+          text={item.text}
+          style={{paddingLeft: `${item.level * 10}px`}}
+        />
+      </div>
+    })
+  }
+
   return (
     <div className={cn()}>
       <div className={cn('title')}>
@@ -17,15 +31,7 @@ function Comments(props) {
         <span>{` (${props.comments.count || 0})`}</span>
       </div>
       <section className={cn('body')}>
-        {props.comments.items &&
-          props.comments.items.map(item => (
-            <Comment
-              key={item.dateCreate}
-              name={item?.author?.profile?.name || 'anonymous'}
-              dateCreate={item.dateCreate}
-              text={item.text}
-            />
-          ))}
+        {props.comments.items && renderComments(props.comments.items)}
       </section>
       <p>
         <Link to={'/login'}>Войдите</Link>, чтобы иметь возможность ответить. <span>Отмена</span>

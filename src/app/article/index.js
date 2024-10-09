@@ -14,7 +14,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import shallowequal from 'shallowequal';
 import articleActions from '../../store-redux/article/actions';
 import commentsActions from '../../store-redux/comments/actions';
-import comments from "../../components/comments";
+import treeToList from '../../utils/tree-to-list';
+import listToTree from '../../utils/list-to-tree';
 
 function Article() {
   const store = useStore();
@@ -26,7 +27,10 @@ function Article() {
 
   useInit(
     async () => {
-      await Promise.all([dispatch(articleActions.load(params.id)), dispatch(commentsActions.load(params.id))]);
+      await Promise.all([
+        dispatch(articleActions.load(params.id)),
+        dispatch(commentsActions.load(params.id)),
+      ]);
     },
     [params.id],
     true,
@@ -36,10 +40,45 @@ function Article() {
     state => ({
       article: state.article.data,
       comments: state.comments.data,
-      waiting: state.article.waiting || state.comments.waiting,
+      waiting: state.article.waiting && state.comments.waiting,
     }),
     shallowequal,
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
+
+  // Формируем массив комментариев для рендера
+  const transformedComments = useMemo(() => {
+    // если загрузились комментарии из апи
+    if (select.comments && select.comments?.items?.length > 0) {
+      // сортируем их по родителям
+      const tree = listToTree(select.comments.items);
+
+      // убираем объект верхнего уровня из результата (иначе он тоже пушит в массив для рендера объект со всеми свойствами
+      // равными undefined и еще ломает иерархию вложенности)
+      const flatItems = tree.flatMap(item => {
+        return [...item.children];
+      });
+      // формируем массив для рендера комментариев согласно их иерархии
+      const items = treeToList(flatItems, (item, level) => {
+        return {
+          _id: item._id,
+          text: item.text,
+          dateCreate: item.dateCreate,
+          type: item?.parent?._type,
+          level: level,
+          author: item?.author?.profile?.name || 'Unknown',
+          isDeleted: item.isDeleted,
+        };
+      });
+
+      return {
+        ...select.comments,
+        items: items,
+      };
+    }
+
+    return select.comments;
+
+  }, [select.comments]);
 
   const { t } = useTranslate();
 
@@ -56,7 +95,12 @@ function Article() {
       </Head>
       <Navigation />
       <Spinner active={select.waiting}>
-        <ArticleCard article={select.article} onAdd={callbacks.addToBasket} t={t} comments={select.comments} />
+        <ArticleCard
+          article={select.article}
+          onAdd={callbacks.addToBasket}
+          t={t}
+          comments={transformedComments}
+        />
       </Spinner>
     </PageLayout>
   );
