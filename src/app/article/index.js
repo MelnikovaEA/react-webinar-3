@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo } from 'react';
+import {memo, useCallback, useMemo} from 'react';
 import { useParams } from 'react-router-dom';
 import useStore from '../../hooks/use-store';
 import useTranslate from '../../hooks/use-translate';
@@ -10,7 +10,8 @@ import Spinner from '../../components/spinner';
 import ArticleCard from '../../components/article-card';
 import LocaleSelect from '../../containers/locale-select';
 import TopHead from '../../containers/top-head';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector as useReduxSelector } from 'react-redux';
+import useSelector from "../../hooks/use-selector";
 import shallowequal from 'shallowequal';
 import articleActions from '../../store-redux/article/actions';
 import commentsActions from '../../store-redux/comments/actions';
@@ -36,15 +37,20 @@ function Article() {
     true,
   );
 
-  const select = useSelector(
+  const select = useReduxSelector(
     state => ({
       article: state.article.data,
       comments: state.comments.data,
       waiting: state.article.waiting && state.comments.waiting,
-      session: store.getState().session.exists
     }),
     shallowequal,
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
+
+  const session = useSelector(state => ({
+    exists: state.session.exists,
+  }));
+
+  console.log(session.exists);
 
   // Формируем массив комментариев для рендера
   const transformedComments = useMemo(() => {
@@ -102,7 +108,7 @@ function Article() {
           replyComment={callbacks.replyComment}
           t={t}
           comments={transformedComments}
-          session={select.session}
+          session={session.exists}
         />
       </Spinner>
     </PageLayout>

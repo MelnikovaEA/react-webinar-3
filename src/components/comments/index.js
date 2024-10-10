@@ -3,16 +3,18 @@ import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import useTranslate from '../../hooks/use-translate';
 import './style.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Comment from '../comment';
 import NewCommentWindow from '../new-comment-window';
 import { useDispatch } from 'react-redux';
 import commentActions from '../../store-redux/comment/actions';
+import isLastInBranch from '../../utils/is-last-in-branch';
 
 function Comments(props) {
   const cn = bem('Comments');
   const { t } = useTranslate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   // Функция для отправки комментария
   const handleReplySubmit = data => {
@@ -21,8 +23,20 @@ function Comments(props) {
 
   const [visibleCommentId, setVisibleCommentId] = useState(null); // Хранит id видимого комментария
 
+  // Функция переключения окна ответа под последним комментарием ветки
   const toggleReplyWindow = id => {
-    setVisibleCommentId(prevId => (prevId === id ? null : id)); // Переключает видимость окна ответа
+    const clickedComment = props.comments.items.find(comment => comment._id === id);
+    if (clickedComment) {
+      const lastCommentIndex = isLastInBranch(
+        props.comments.items,
+        clickedComment.dateCreate,
+        clickedComment._id,
+      );
+      const lastCommentInBranch = props.comments.items[lastCommentIndex];
+      setVisibleCommentId(prevId =>
+        prevId === lastCommentInBranch.dateCreate ? null : lastCommentInBranch.dateCreate,
+      );
+    }
   };
 
   const renderComments = items => {
@@ -32,6 +46,7 @@ function Comments(props) {
           className={cn('item')}
           key={item.dateCreate}
           style={{ paddingLeft: `${item.level * 30}px` }}
+          data-level={item.level}
         >
           <Comment
             id={item._id}
@@ -41,8 +56,8 @@ function Comments(props) {
             text={item.text}
             style={{ paddingLeft: `${item.level * 10}px` }}
             session={props.session}
-            isVisible={visibleCommentId === item.dateCreate} // Передает состояние видимости
-            onToggleReply={() => toggleReplyWindow(item.dateCreate)}
+            isVisible={visibleCommentId === item.dateCreate}
+            onToggleReply={() => toggleReplyWindow(item._id)}
             onSubmit={handleReplySubmit}
           />
         </div>
@@ -69,7 +84,10 @@ function Comments(props) {
         ) : (
           <div className={cn('footer')}>
             <p className={cn('link')}>
-              <Link to={'/login'}>Войдите</Link>, чтобы иметь возможность комментировать
+              <Link to={'/login'} state={{ back: location.pathname }}>
+                Войдите
+              </Link>
+              , чтобы иметь возможность комментировать
             </p>
           </div>
         ))}

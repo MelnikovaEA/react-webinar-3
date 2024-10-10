@@ -8,6 +8,10 @@
   align-items: center;
 }
 
+.SideLayout a {
+  color: #0087E9;
+}
+
 .SideLayout_side_start {
   justify-content: flex-start;
 }

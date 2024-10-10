@@ -3,12 +3,13 @@ import { cn as bem } from '@bem-react/classname';
 import useTranslate from '../../hooks/use-translate';
 import dateFormat from '../../utils/date-format';
 import './style.css';
-import { Link } from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import ReplyWindow from '../reply-window';
 
 function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply, onSubmit }) {
   const cn = bem('Comment');
   const { t } = useTranslate();
+  const location = useLocation();
 
   return (
     <div className={cn()}>
@@ -35,8 +36,10 @@ function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply
         ) : (
           <div className={cn('reply')}>
             <p className={cn('link')}>
-              <Link to={'/login'}>Войдите</Link>, чтобы иметь возможность ответить.{' '}
-              <span onClick={onToggleReply}>Отмена</span>
+              <Link to={'/login'} state={{ back: location.pathname }}>
+                Войдите
+              </Link>
+              , чтобы иметь возможность ответить. <span onClick={onToggleReply}>Отмена</span>
             </p>
           </div>
         ))}

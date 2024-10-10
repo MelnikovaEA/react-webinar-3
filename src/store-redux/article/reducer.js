@@ -2,6 +2,7 @@
 export const initialState = {
   data: {},
   waiting: false, // признак ожидания загрузки
+  error: null,
 };
 
 // Обработчик действий
@@ -14,7 +15,8 @@ function reducer(state = initialState, action) {
       return { ...state, data: action.payload.data, waiting: false };
 
     case 'article/load-error':
-      return { ...state, data: {}, waiting: false }; //@todo текст ошибки сохранять?
+      return { ...state, data: {}, waiting: false, error: action.payload.error }; //текст ошибки может понадобиться для
+    // вывода сообщения об ошибке
 
     default:
       // Нет изменений
