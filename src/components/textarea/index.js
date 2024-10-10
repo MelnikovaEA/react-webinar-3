@@ -6,7 +6,7 @@ import debounce from 'lodash.debounce';
 import './style.css';
 
 function Textarea(props) {
-  const { onChange = () => {}, type = 'text', theme = '' } = props;
+  const { onChange = () => {}, theme = '' } = props;
   // Внутренний стейт для быстрого отображения ввода
   const [value, setValue] = useState(props.value);
 
