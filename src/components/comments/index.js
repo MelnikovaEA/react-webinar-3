@@ -1,5 +1,4 @@
 import { memo, useState } from 'react';
-import PropTypes from 'prop-types';
 import { cn as bem } from '@bem-react/classname';
 import useTranslate from '../../hooks/use-translate';
 import './style.css';
@@ -85,9 +84,9 @@ function Comments(props) {
           <div className={cn('footer')}>
             <p className={cn('link')}>
               <Link to={'/login'} state={{ back: location.pathname }}>
-                Войдите
+                {t('comments.enter')}
               </Link>
-              , чтобы иметь возможность комментировать
+              , {t('comments.toBeAbleComment')}
             </p>
           </div>
         ))}

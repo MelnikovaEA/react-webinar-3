@@ -1,4 +1,4 @@
-import {memo, useCallback, useMemo} from 'react';
+import { memo, useCallback, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import useStore from '../../hooks/use-store';
 import useTranslate from '../../hooks/use-translate';
@@ -11,7 +11,7 @@ import ArticleCard from '../../components/article-card';
 import LocaleSelect from '../../containers/locale-select';
 import TopHead from '../../containers/top-head';
 import { useDispatch, useSelector as useReduxSelector } from 'react-redux';
-import useSelector from "../../hooks/use-selector";
+import useSelector from '../../hooks/use-selector';
 import shallowequal from 'shallowequal';
 import articleActions from '../../store-redux/article/actions';
 import commentsActions from '../../store-redux/comments/actions';
@@ -84,7 +84,6 @@ function Article() {
     }
 
     return select.comments;
-
   }, [select.comments]);
 
   const { t } = useTranslate();

@@ -1,4 +1,17 @@
 {
+  "prepositions.atTime": "at",
+  "1": "january",
+  "2": "february",
+  "3": "march",
+  "4": "april",
+  "5": "may",
+  "6": "june",
+  "7": "july",
+  "8": "august",
+  "9": "september",
+  "10": "october",
+  "11": "november",
+  "12": "december",
   "title": "Shop",
   "menu.main": "Main",
   "basket.title": "Cart",
@@ -21,5 +34,13 @@
   "auth.signIn": "Sign in",
   "session.signIn": "Sign In",
   "session.signOut": "Sign Out",
-  "comments.title": "Comments"
+  "comments.title": "Comments",
+  "comments.reply": "Reply",
+  "comments.cancel": "Cancel",
+  "comments.send": "Send",
+  "comments.newAnswer": "New answer",
+  "comments.newComment": "New comment",
+  "comments.enter": "Enter",
+  "comments.toBeAbleAnswer": "to be able answer",
+  "comments.toBeAbleComment": "to be able comment"
 }

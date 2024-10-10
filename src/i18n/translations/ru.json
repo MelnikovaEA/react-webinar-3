@@ -1,4 +1,17 @@
 {
+  "prepositions.atTime": "в",
+  "1": "января",
+  "2": "февраля",
+  "3": "марта",
+  "4": "апреля",
+  "5": "мая",
+  "6": "июня",
+  "7": "июля",
+  "8": "августа",
+  "9": "сентября",
+  "10": "октября",
+  "11": "ноября",
+  "12": "декабря",
   "title": "Магазин",
   "menu.main": "Главная",
   "basket.title": "Корзина",
@@ -23,5 +36,13 @@
   "auth.signIn": "Войти",
   "session.signIn": "Вход",
   "session.signOut": "Выход",
-  "comments.title": "Комментарии"
+  "comments.title": "Комментарии",
+  "comments.reply": "Ответить",
+  "comments.cancel": "Отмена",
+  "comments.send": "Отправить",
+  "comments.newAnswer": "Новый ответ",
+  "comments.newComment": "Новый комментарий",
+  "comments.enter": "Войдите",
+  "comments.toBeAble": "чтобы иметь возможность ответить",
+  "comments.toBeAbleComment": "чтобы иметь возможность комментировать"
 }

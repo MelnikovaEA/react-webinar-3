@@ -5,11 +5,13 @@ import commentsActions from '../../store-redux/comments/actions';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Textarea from "../textarea";
+import useTranslate from "../../hooks/use-translate";
 
 function ReplyWindow({ id, name, theme, onToggleReply, onSubmitReply }) {
   const cn = bem('ReplyWindow');
   const dispatch = useDispatch();
   const params = useParams();
+  const { t } = useTranslate();
 
   const [comment, setComment] = useState('');
 
@@ -32,11 +34,11 @@ function ReplyWindow({ id, name, theme, onToggleReply, onSubmitReply }) {
   return (
     <div className={cn()}>
       <form onSubmit={handleSubmit} className={cn('form')}>
-        <span className={cn('title')}>Новый ответ</span>
+        <span className={cn('title')}>{t('comments.newAnswer')}</span>
         <Textarea name={name} theme={theme} onChange={handleTextareaChange} value={comment} />
         <div className={cn('controls')}>
-          <button type="submit">Отправить</button>
-          <button onClick={onToggleReply}>Отмена</button>
+          <button type="submit">{t('comments.send')}</button>
+          <button onClick={onToggleReply}>{t('comments.cancel')}</button>
         </div>
       </form>
     </div>
