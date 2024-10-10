@@ -1,22 +1,22 @@
-.ReplyWindow {}
+.NewCommentWindow {}
 
-.ReplyWindow-title {
+.NewCommentWindow-title {
   font-weight: bold;
   font-size: 12px;
   padding-bottom: 10px;
 }
 
-.ReplyWindow-form {
+.NewCommentWindow-form {
   display: flex;
   flex-direction: column;
 }
 
-.ReplyWindow-controls {
+.NewCommentWindow-controls {
   display: flex;
   justify-content: flex-start;
   padding-top: 10px;
 }
 
-.ReplyWindow-controls button{
+.NewCommentWindow-controls button{
   margin-right: 10px;
 }

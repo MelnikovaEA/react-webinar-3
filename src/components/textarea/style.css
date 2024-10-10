@@ -1,0 +1,11 @@
+.Textarea {
+  font-size: 16px;
+  padding: 2px;
+  outline: none;
+  overflow: auto;
+  resize: none;
+}
+
+.Textarea_theme_medium {
+  height: 80px;
+}

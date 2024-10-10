@@ -4,8 +4,6 @@
   align-items: flex-start;
   font-size: 12px;
   padding-bottom: 30px;
-  width: 100%;
-  flex: 1;
 }
 
 .Comment-author {
@@ -23,6 +21,7 @@
 
 .Comment-action {
   color: #0087E9;
+  cursor: pointer;
 }
 
 .Comment-reply {
@@ -46,6 +45,7 @@
 .Comment-link span {
   color: #666666;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 

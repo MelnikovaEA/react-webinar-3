@@ -5,19 +5,10 @@ import dateFormat from '../../utils/date-format';
 import './style.css';
 import { Link } from 'react-router-dom';
 import ReplyWindow from '../reply-window';
-import {useDispatch} from "react-redux";
-import commentActions from '../../store-redux/comment/actions';
 
-function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply }) {
+function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply, onSubmit }) {
   const cn = bem('Comment');
   const { t } = useTranslate();
-
-  const dispatch = useDispatch();
-
-  // Функция для отправки комментария
-  const handleReplySubmit = (data) => {
-    dispatch(commentActions.reply(data)); // Отправляем комментарий через Redux action
-  };
 
   return (
     <div className={cn()}>
@@ -37,8 +28,8 @@ function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply
             <ReplyWindow
               id={id}
               onToggleReply={onToggleReply}
-              theme="fullWidth"
-              onSubmitReply={handleReplySubmit}
+              theme="medium"
+              onSubmitReply={onSubmit}
             />
           </div>
         ) : (
