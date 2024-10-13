@@ -31,5 +31,12 @@ export default function listToTree(list, key = '_id') {
       if (roots[item[key]]) delete roots[item[key]];
     }
   }
-  return Object.values(roots);
+
+  let result = Object.values(roots);
+
+  if(!Array.isArray(result[0])) {
+   return result[0]?.hasOwnProperty('children') ? result[0].children : [];
+  } else {
+    return result;
+  }
 }

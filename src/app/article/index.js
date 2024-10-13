@@ -57,13 +57,13 @@ function Article() {
       // сортируем их по родителям
       const tree = listToTree(select.comments.items);
 
-      // убираем объект верхнего уровня из результата (иначе он тоже пушит в массив для рендера объект со всеми свойствами
-      // равными undefined и еще ломает иерархию вложенности)
-      const flatItems = tree.flatMap(item => {
-        return [...item.children];
-      });
+     // //убираем объект верхнего уровня из результата (иначе он тоже пушит в массив для рендера объект со всеми свойствами
+     //  //равными undefined и еще ломает иерархию вложенности)
+     //  const flatItems = tree.flatMap(item => {
+     //    return [...item.children];
+     //  });
       // формируем массив для рендера комментариев согласно их иерархии
-      const items = treeToList(flatItems, (item, level) => {
+      const items = treeToList(tree, (item, level) => {
         return {
           _id: item._id,
           text: item.text,

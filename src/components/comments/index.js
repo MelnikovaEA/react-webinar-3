@@ -21,7 +21,7 @@ function Comments(props) {
   };
 
   const [visibleCommentId, setVisibleCommentId] = useState(null); // Хранит id видимого комментария
-  const [visibleCommentUsername, setVisibleCommentUsername] = useState(null); // Хранит id видимого комментария
+  const [visibleCommentUsername, setVisibleCommentUsername] = useState(null); // Хранит имя автора комментария, на который нужно ответить
 
   // Функция переключения окна ответа под последним комментарием ветки
   const toggleReplyWindow = id => {
@@ -45,13 +45,12 @@ function Comments(props) {
       return (
         <div
           className={cn('item')}
-          key={item.dateCreate}
+          key={item.dateCreate + item._id}
           style={{ paddingLeft: item.level < 50 ? `${item.level * 10}px` : '500px' }}
           data-level={item.level}
         >
           <Comment
             id={item._id}
-            key={item.dateCreate}
             name={item.author || 'anonymous'}
             dateCreate={item.dateCreate}
             text={item.text}
