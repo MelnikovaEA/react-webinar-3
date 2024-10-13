@@ -37,7 +37,7 @@ function ReplyWindow({ id, name, theme, placeholder, onToggleReply, onSubmitRepl
         <span className={cn('title')}>{t('comments.newAnswer')}</span>
         <Textarea name={name} theme={theme} placeholder={placeholder} onChange={handleTextareaChange} value={comment} />
         <div className={cn('controls')}>
-          <button type="submit">{t('comments.send')}</button>
+          <button type="submit" disabled={!comment} className={!comment && cn('disabled')}>{t('comments.send')}</button>
           <button onClick={onToggleReply}>{t('comments.cancel')}</button>
         </div>
       </form>

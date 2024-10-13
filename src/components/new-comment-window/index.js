@@ -36,7 +36,7 @@ function NewCommentWindow({ name, placeholder, theme, onSubmitReply }) {
         <span className={cn('title')}>{t('comments.newComment')}</span>
         <Textarea name={name} theme={theme} placeholder={placeholder} onChange={handleTextareaChange} value={comment} />
         <div className={cn('controls')}>
-          <button type="submit">{t('comments.send')}</button>
+          <button type="submit" disabled={!comment} className={!comment && cn('disabled')}>{t('comments.send')}</button>
         </div>
       </form>
     </div>
