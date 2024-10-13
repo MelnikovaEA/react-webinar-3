@@ -59,6 +59,7 @@ function Comments(props) {
             onToggleReply={() => toggleReplyWindow(item._id)}
             onSubmit={handleReplySubmit}
             currentCommentUsername={visibleCommentUsername}
+            currentUserName={props.currentUserName}
           />
         </div>
       );

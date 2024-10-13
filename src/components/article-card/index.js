@@ -12,6 +12,7 @@ function ArticleCard(props) {
     t = text => text,
     comments,
     session,
+    currentUserName
   } = props;
 
   const cn = bem('ArticleCard');
@@ -40,6 +41,7 @@ function ArticleCard(props) {
       <Comments
         comments={comments}
         session={session}
+        currentUserName={currentUserName}
       />
     </div>
   );

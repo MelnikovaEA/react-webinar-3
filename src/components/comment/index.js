@@ -6,7 +6,7 @@ import './style.css';
 import { Link, useLocation } from 'react-router-dom';
 import ReplyWindow from '../reply-window';
 
-function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply, onSubmit, userId, currentCommentUsername }) {
+function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply, onSubmit, userId, currentCommentUsername, currentUserName }) {
   const cn = bem('Comment');
   const { t } = useTranslate();
   const location = useLocation();
@@ -21,7 +21,7 @@ function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply
   return (
     <div className={cn()}>
       <div>
-        <span className={cn('author')}>{name}</span>
+        <span className={`${cn('author')} ${name === currentUserName ? cn('highlighted') : ''}`}>{name}</span>
         <span className={cn('dateCreate')}>
           {dateFormat(dateCreate).day} {t(dateFormat(dateCreate).month)}{' '}
           {dateFormat(dateCreate).year} {t('prepositions.atTime')} {dateFormat(dateCreate).time}

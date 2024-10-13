@@ -48,6 +48,7 @@ function Article() {
 
   const selectStore = useSelector(state => ({
     exists: state.session.exists,
+    currentUserName: state.session.user?.profile?.name,
   }));
 
   // Формируем массив комментариев для рендера
@@ -57,11 +58,6 @@ function Article() {
       // сортируем их по родителям
       const tree = listToTree(select.comments.items);
 
-     // //убираем объект верхнего уровня из результата (иначе он тоже пушит в массив для рендера объект со всеми свойствами
-     //  //равными undefined и еще ломает иерархию вложенности)
-     //  const flatItems = tree.flatMap(item => {
-     //    return [...item.children];
-     //  });
       // формируем массив для рендера комментариев согласно их иерархии
       const items = treeToList(tree, (item, level) => {
         return {
@@ -106,6 +102,7 @@ function Article() {
           t={t}
           comments={transformedComments}
           session={selectStore.exists}
+          currentUserName={selectStore.currentUserName}
         />
       </Spinner>
     </PageLayout>
