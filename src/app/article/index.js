@@ -46,11 +46,9 @@ function Article() {
     shallowequal,
   ); // Нужно указать функцию для сравнения свойства объекта, так как хуком вернули объект
 
-  const session = useSelector(state => ({
+  const selectStore = useSelector(state => ({
     exists: state.session.exists,
   }));
-
-  console.log(session.exists);
 
   // Формируем массив комментариев для рендера
   const transformedComments = useMemo(() => {
@@ -107,7 +105,7 @@ function Article() {
           replyComment={callbacks.replyComment}
           t={t}
           comments={transformedComments}
-          session={session.exists}
+          session={selectStore.exists}
         />
       </Spinner>
     </PageLayout>

@@ -1,15 +1,12 @@
 import { memo, useState } from 'react';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
-import commentsActions from '../../store-redux/comments/actions';
-import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Textarea from '../textarea';
 import useTranslate from '../../hooks/use-translate';
 
 function NewCommentWindow({ name, placeholder, theme, onSubmitReply }) {
   const cn = bem('NewCommentWindow');
-  const dispatch = useDispatch();
   const params = useParams();
   const { t } = useTranslate();
 
@@ -26,7 +23,6 @@ function NewCommentWindow({ name, placeholder, theme, onSubmitReply }) {
     if (comment.trim()) {
       onSubmitReply({ text: comment, parent: { _id: params.id, _type: 'article' } }); // вызываем экшен для отправки комментария
       setComment('');
-      dispatch(commentsActions.load(params.id));
     }
   };
 
@@ -36,7 +32,7 @@ function NewCommentWindow({ name, placeholder, theme, onSubmitReply }) {
         <span className={cn('title')}>{t('comments.newComment')}</span>
         <Textarea name={name} theme={theme} placeholder={placeholder} onChange={handleTextareaChange} value={comment} />
         <div className={cn('controls')}>
-          <button type="submit" disabled={!comment} className={!comment && cn('disabled')}>{t('comments.send')}</button>
+          <button type="submit" disabled={!comment} className={!comment ? cn('disabled') : ''}>{t('comments.send')}</button>
         </div>
       </form>
     </div>

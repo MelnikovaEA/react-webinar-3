@@ -1,16 +1,11 @@
 import { memo, useState } from 'react';
 import { cn as bem } from '@bem-react/classname';
 import './style.css';
-import commentsActions from '../../store-redux/comments/actions';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import Textarea from "../textarea";
 import useTranslate from "../../hooks/use-translate";
 
 function ReplyWindow({ id, name, theme, placeholder, onToggleReply, onSubmitReply}) {
   const cn = bem('ReplyWindow');
-  const dispatch = useDispatch();
-  const params = useParams();
   const { t } = useTranslate();
 
   const [comment, setComment] = useState('');
@@ -27,7 +22,6 @@ function ReplyWindow({ id, name, theme, placeholder, onToggleReply, onSubmitRepl
       onSubmitReply({ text: comment, parent: { _id: id, _type: 'comment' } }); // вызываем экшен для отправки комментария
       setComment('');
       onToggleReply();
-      dispatch(commentsActions.load(params.id));
     }
   };
 
@@ -37,7 +31,7 @@ function ReplyWindow({ id, name, theme, placeholder, onToggleReply, onSubmitRepl
         <span className={cn('title')}>{t('comments.newAnswer')}</span>
         <Textarea name={name} theme={theme} placeholder={placeholder} onChange={handleTextareaChange} value={comment} />
         <div className={cn('controls')}>
-          <button type="submit" disabled={!comment} className={!comment && cn('disabled')}>{t('comments.send')}</button>
+          <button type="submit" disabled={!comment} className={!comment ? cn('disabled') : ''}>{t('comments.send')}</button>
           <button onClick={onToggleReply}>{t('comments.cancel')}</button>
         </div>
       </form>

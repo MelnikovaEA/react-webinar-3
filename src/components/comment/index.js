@@ -6,7 +6,7 @@ import './style.css';
 import { Link, useLocation } from 'react-router-dom';
 import ReplyWindow from '../reply-window';
 
-function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply, onSubmit }) {
+function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply, onSubmit, userId }) {
   const cn = bem('Comment');
   const { t } = useTranslate();
   const location = useLocation();
@@ -33,6 +33,7 @@ function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply
               theme="medium"
               placeholder={`Мой ответ для ${name}`}
               onSubmitReply={onSubmit}
+              userId={userId}
             />
           </div>
         ) : (

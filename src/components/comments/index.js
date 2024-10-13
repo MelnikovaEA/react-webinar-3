@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import Comment from '../comment';
 import NewCommentWindow from '../new-comment-window';
 import { useDispatch } from 'react-redux';
-import commentActions from '../../store-redux/comment/actions';
+import commentsActions from '../../store-redux/comments/actions';
 import isLastInBranch from '../../utils/is-last-in-branch';
 
 function Comments(props) {
@@ -17,7 +17,7 @@ function Comments(props) {
 
   // Функция для отправки комментария
   const handleReplySubmit = data => {
-    dispatch(commentActions.reply(data)); // Отправляем комментарий через Redux action
+    dispatch(commentsActions.reply(data)); // Отправляем комментарий через Redux action
   };
 
   const [visibleCommentId, setVisibleCommentId] = useState(null); // Хранит id видимого комментария
