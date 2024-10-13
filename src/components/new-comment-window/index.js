@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import Textarea from '../textarea';
 import useTranslate from '../../hooks/use-translate';
 
-function NewCommentWindow({ name, theme, onSubmitReply }) {
+function NewCommentWindow({ name, placeholder, theme, onSubmitReply }) {
   const cn = bem('NewCommentWindow');
   const dispatch = useDispatch();
   const params = useParams();
@@ -34,7 +34,7 @@ function NewCommentWindow({ name, theme, onSubmitReply }) {
     <div className={cn()}>
       <form onSubmit={handleSubmit} className={cn('form')}>
         <span className={cn('title')}>{t('comments.newComment')}</span>
-        <Textarea name={name} theme={theme} onChange={handleTextareaChange} value={comment} />
+        <Textarea name={name} theme={theme} placeholder={placeholder} onChange={handleTextareaChange} value={comment} />
         <div className={cn('controls')}>
           <button type="submit">{t('comments.send')}</button>
         </div>

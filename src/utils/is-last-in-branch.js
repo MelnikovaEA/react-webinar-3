@@ -8,7 +8,7 @@ export default function isLastInBranch(comments, dateCreate, id) {
   if (index !== -1) {
     for (let i = index; i < comments.length - 1; i++) {
       if (comments[i + 1]) {
-        if (comments[i + 1].level === 0) {
+        if (comments[i + 1].level <= comments[i].level) {
           lastInBranch = comments[i];
           break;
         }

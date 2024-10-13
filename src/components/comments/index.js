@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import {memo, useState} from 'react';
 import { cn as bem } from '@bem-react/classname';
 import useTranslate from '../../hooks/use-translate';
 import './style.css';
@@ -44,7 +44,7 @@ function Comments(props) {
         <div
           className={cn('item')}
           key={item.dateCreate}
-          style={{ paddingLeft: `${item.level * 30}px` }}
+          style={{ paddingLeft: item.level < 50 ? `${item.level * 10}px` : '500px' }}
           data-level={item.level}
         >
           <Comment
@@ -53,7 +53,6 @@ function Comments(props) {
             name={item.author || 'anonymous'}
             dateCreate={item.dateCreate}
             text={item.text}
-            style={{ paddingLeft: `${item.level * 10}px` }}
             session={props.session}
             isVisible={visibleCommentId === item.dateCreate}
             onToggleReply={() => toggleReplyWindow(item._id)}
@@ -77,6 +76,7 @@ function Comments(props) {
         (props.session ? (
           <NewCommentWindow
             onToggleReply={toggleReplyWindow}
+            placeholder={'Text'}
             theme="medium"
             onSubmitReply={handleReplySubmit}
           />

@@ -1,9 +1,15 @@
 .Textarea {
   font-size: 16px;
-  padding: 2px;
+  padding: 4px 5px;
   outline: none;
   overflow: auto;
   resize: none;
+  box-sizing: border-box;
+}
+
+.Textarea::placeholder {
+  color: black;
+  font-size: 14px;
 }
 
 .Textarea_theme_medium {

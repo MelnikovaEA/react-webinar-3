@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import Textarea from "../textarea";
 import useTranslate from "../../hooks/use-translate";
 
-function ReplyWindow({ id, name, theme, onToggleReply, onSubmitReply }) {
+function ReplyWindow({ id, name, theme, placeholder, onToggleReply, onSubmitReply}) {
   const cn = bem('ReplyWindow');
   const dispatch = useDispatch();
   const params = useParams();
@@ -35,7 +35,7 @@ function ReplyWindow({ id, name, theme, onToggleReply, onSubmitReply }) {
     <div className={cn()}>
       <form onSubmit={handleSubmit} className={cn('form')}>
         <span className={cn('title')}>{t('comments.newAnswer')}</span>
-        <Textarea name={name} theme={theme} onChange={handleTextareaChange} value={comment} />
+        <Textarea name={name} theme={theme} placeholder={placeholder} onChange={handleTextareaChange} value={comment} />
         <div className={cn('controls')}>
           <button type="submit">{t('comments.send')}</button>
           <button onClick={onToggleReply}>{t('comments.cancel')}</button>

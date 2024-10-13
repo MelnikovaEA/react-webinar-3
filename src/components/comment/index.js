@@ -31,6 +31,7 @@ function Comment({ id, name, dateCreate, text, session, isVisible, onToggleReply
               id={id}
               onToggleReply={onToggleReply}
               theme="medium"
+              placeholder={`Мой ответ для ${name}`}
               onSubmitReply={onSubmit}
             />
           </div>
