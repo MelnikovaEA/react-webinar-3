@@ -9,11 +9,22 @@ function Textarea(props) {
   const { onChange = () => {}, theme = '' } = props;
   // Внутренний стейт для быстрого отображения ввода
   const [value, setValue] = useState(props.value);
+  const [isFocused, setIsFocused] = useState(false);
 
   const onChangeDebounce = useCallback(
     debounce(value => onChange(value, props.name), 600),
     [onChange, props.name],
   );
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    if (value.trim() === '') {
+      setIsFocused(false);
+    }
+  };
 
   // Обработчик изменений в поле
   const onChangeHandler = event => {
@@ -29,7 +40,9 @@ function Textarea(props) {
     <textarea
       className={cn({ theme: theme })}
       value={value}
-      placeholder={props.placeholder}
+      placeholder={!isFocused && value.trim() === '' ? props.placeholder : ''}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       onChange={onChangeHandler}
     />
   );

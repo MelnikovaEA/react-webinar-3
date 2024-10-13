@@ -21,10 +21,12 @@ function Comments(props) {
   };
 
   const [visibleCommentId, setVisibleCommentId] = useState(null); // Хранит id видимого комментария
+  const [visibleCommentUsername, setVisibleCommentUsername] = useState(null); // Хранит id видимого комментария
 
   // Функция переключения окна ответа под последним комментарием ветки
   const toggleReplyWindow = id => {
     const clickedComment = props.comments.items.find(comment => comment._id === id);
+    setVisibleCommentUsername(clickedComment.author);
     if (clickedComment) {
       const lastCommentIndex = isLastInBranch(
         props.comments.items,
@@ -57,6 +59,7 @@ function Comments(props) {
             isVisible={visibleCommentId === item.dateCreate}
             onToggleReply={() => toggleReplyWindow(item._id)}
             onSubmit={handleReplySubmit}
+            currentCommentUsername={visibleCommentUsername}
           />
         </div>
       );
