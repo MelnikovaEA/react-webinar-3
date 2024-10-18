@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import useServices from '../hooks/use-services';
 
 export default function useTranslate() {
-  const { i18n } = useServices();
+  const { i18n, api } = useServices();
   const [language, setLanguage] = useState(i18n.currentLanguage);
 
   // Слушаем изменения языка
@@ -22,7 +22,7 @@ export default function useTranslate() {
 
   const changeLanguage = newLang => {
     i18n.setLanguage(newLang);
-    window.location.reload();
+    api.setHeader('Accept-Language', newLang);
   };
 
   return { t, language, changeLanguage };

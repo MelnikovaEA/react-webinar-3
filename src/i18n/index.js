@@ -2,7 +2,7 @@ import * as translations from "./translations";
 
 class I18nService {
     constructor() {
-        this.currentLanguage = localStorage.getItem('language') || 'ru';
+        this.currentLanguage = 'ru';
         this.listeners = [];
     }
 

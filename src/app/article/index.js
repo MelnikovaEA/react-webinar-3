@@ -25,6 +25,7 @@ function Article() {
   // Параметры из пути /articles/:id
 
   const params = useParams();
+  const { t, language} = useTranslate();
 
   useInit(
     async () => {
@@ -33,7 +34,7 @@ function Article() {
         dispatch(commentsActions.load(params.id)),
       ]);
     },
-    [params.id],
+    [params.id, language],
     true,
   );
 
@@ -79,8 +80,6 @@ function Article() {
 
     return select.comments;
   }, [select.comments]);
-
-  const { t } = useTranslate();
 
   const callbacks = {
     // Добавление в корзину
