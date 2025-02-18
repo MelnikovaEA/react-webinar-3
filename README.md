@@ -11,5 +11,3 @@ Lecture-4: https://github.com/ylabio/react-webinar-3/pull/351
 
 Lecture-5: https://github.com/ylabio/react-webinar-3/pull/412
 
-И еще у меня пока техподдержка не поправила адрес электронной почты,
-корретный адрес: shakti86@mail.ru
